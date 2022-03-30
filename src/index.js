@@ -124,11 +124,13 @@ const Game = () => {
   });
 
   
-  //ゲームステータスを表示するための文字列を設定
+  //ゲームステータスの表示文字列を設定
   const [winner, ] = calculateWinner(current.squares);
   let status;
   if (winner) {
     status = "Winner: " + winner;
+  } else if (state.stepNumber === 9) {
+    status = "Draw";
   } else {
     status = 'Next player: ' + (state.xIsNext ? "X" : "O");
   }
