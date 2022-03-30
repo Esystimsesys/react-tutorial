@@ -88,7 +88,12 @@ const Game = () => {
     
     return (
       <li key={move}>
-        <button onClick={() => jumpTo(move)}>{desc}</button>
+        <button
+          className={(move == state.stepNumber) ? "game-info-current" : ""}
+          onClick={() => jumpTo(move)}
+        >
+          {desc}
+        </button>
       </li>
     );
   });
