@@ -14,30 +14,27 @@ const Board = (props) => {
   const renderSquare = (i) => {
     return (
       <Square
+        key={i}
         value={props.squares[i]}
         onClick={() => props.onClick(i)}
       />
     );
   };
 
+  const rows = [];
+  for (let i = 0; i < 3; i++){
+    const cols = [];
+    for (let j = 0; j < 3; j++){
+      cols.push(renderSquare(i * 3 + j));
+    }
+    rows.push(
+      <div key={i} className="board-row">
+        {cols}
+      </div>);
+  }
+
   return (
-    <div>
-      <div className="board-row">
-        {renderSquare(0)}
-        {renderSquare(1)}
-        {renderSquare(2)}
-      </div>
-      <div className="board-row">
-        {renderSquare(3)}
-        {renderSquare(4)}
-        {renderSquare(5)}
-      </div>
-      <div className="board-row">
-        {renderSquare(6)}
-        {renderSquare(7)}
-        {renderSquare(8)}
-      </div>
-    </div>
+    <div>{rows}</div>
   );
 };
 
