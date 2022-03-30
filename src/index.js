@@ -45,10 +45,11 @@ const Board = (props) => {
 const Game = () => {
   const [state, setState] = useState({
     history: [{
-      squares: Array(9).fill(null)
+      squares: Array(9).fill(null),
+      move: Array(2).fill(null),
     }],
     stepNumber: 0,
-    xIsNext: true
+    xIsNext: true,
   });
 
 
@@ -60,10 +61,12 @@ const Game = () => {
     if (calculateWinner(current.squares) || squares[i]) return;
 
     squares[i] = state.xIsNext ? "X" : "O";
+    const rowNo = Math.floor(i / 3) + 1;
+    const colNo = i % 3 + 1;
     setState({
-      history: history.concat([{ squares: squares }]),
+      history: history.concat([{ squares: squares, move: [colNo, rowNo] }]),
       stepNumber: history.length,
-      xIsNext: !state.xIsNext
+      xIsNext: !state.xIsNext,
     });
   };
 
@@ -80,7 +83,7 @@ const Game = () => {
 
   const moves = history.map((step, move) => {
     const desc = move ?
-      "Go to move #" + move :
+      "Go to move #" + move + "(" + step.move[0] + "," + step.move[1] + ")" :
       "Go to game start";
     
     return (
