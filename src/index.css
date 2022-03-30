@@ -39,6 +39,11 @@ button {
   outline: none;
 }
 
+.square-win{
+  background: #ffff00;
+  border: 2px solid #ff0000;
+}
+
 .kbd-navigation .square:focus {
   background: #ddd;
 }
