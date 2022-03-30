@@ -30,7 +30,8 @@ const Board = (props) => {
     rows.push(
       <div key={i} className="board-row">
         {cols}
-      </div>);
+      </div>
+    );
   }
 
   return (
@@ -47,6 +48,7 @@ const Game = () => {
     }],
     stepNumber: 0,
     xIsNext: true,
+    sortAscend: true,
   });
 
 
@@ -64,6 +66,7 @@ const Game = () => {
       history: history.concat([{ squares: squares, move: [colNo, rowNo] }]),
       stepNumber: history.length,
       xIsNext: !state.xIsNext,
+      sortAscend: state.sortAscend,
     });
   };
 
@@ -73,6 +76,12 @@ const Game = () => {
       stepNumber: step,
       xIsNext: (step % 2) === 0,
     });
+  };
+
+  const changeSort = () => {
+    const newState = { ...state };
+    newState.sortAscend = !newState.sortAscend;
+    setState(newState);
   };
   
   const history = state.history;
@@ -111,7 +120,8 @@ const Game = () => {
       </div>
       <div className="game-info">
         <div>{status}</div>
-        <ol>{moves}</ol>
+        <button onClick={changeSort}>{state.sortAscend ? "Sort Ascend" : "Sort Descend"}</button>
+        <ol>{state.sortAscend ? moves : moves.reverse()}</ol>
       </div>
     </div>
   );
